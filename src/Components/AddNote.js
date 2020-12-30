@@ -17,18 +17,19 @@ export default function AddNote(props){
     ]
 
     function postNewNote(){
+        var i = 0;
+        while(props.keys.has(i)) i++
         fetch("https://fast-forest-86060.herokuapp.com/notes",{
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify({
-                "_id":5,
+                "_id":i,
                 title:title,
                 content:content
             })
         })
             .then(response => response.json())
-            .then(data => alert(data.status + " fds " + data.message))
-            .then(alert("I'm done!"))
+            .then(alert("New note added!"))
     }
     return(
         <div>

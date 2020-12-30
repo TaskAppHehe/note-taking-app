@@ -5,7 +5,7 @@ import Main from "./Components/App"
 function App() {
   return (
     <div>
-      <img src={logo} className="App-logo" alt="logo" /> 
+      {/*<img src={logo} className="App-logo" alt="logo" /> */}
       <Main/>
     </div>
   );

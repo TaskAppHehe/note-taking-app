@@ -2,21 +2,34 @@ import React, {useState, useEffect} from "react";
 
 import Note from "./Note"
 import AddNote from "./AddNote"
-export default function App(props){
+
+import "./style.css"
+export default function App(){
     var [notes,setNotes] = useState([])
+    var [keys, setKeys] = useState(new Set())
 
     useEffect(()=>{
         fetch("https://fast-forest-86060.herokuapp.com/notes")
             .then(data => data.json())
-            .then(data => setNotes(data))
-    },[])
+            .then(data => {
+                setNotes(data)
+                var newKeys = new Set(keys)
+                //add all the _id to keys so that we can figure out new unique _id
+                data.map(d => {
+                    if(!newKeys.has(d._id)) newKeys.add(d._id)
+                })
+                setKeys(newKeys)
+            })
+    },[keys])
 
     return (
         <div>
-            <AddNote/>
-            {
-                notes.map(note => <Note note = {note}/>)
-            }
+            <AddNote keys={keys}/>
+            <div className="container">
+                {
+                    notes.map(note => <Note note = {note}/>)
+                }
+            </div>
         </div>
     )
 }
