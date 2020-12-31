@@ -1,4 +1,14 @@
 .container{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.vertical-flex-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.m-10{
+    margin: 10px;
 }

@@ -7,6 +7,7 @@ import "./style.css"
 export default function App(){
     var [notes,setNotes] = useState([])
     var [keys, setKeys] = useState(new Set())
+    var [del, setDel] = useState(false)
 
     useEffect(()=>{
         fetch("https://fast-forest-86060.herokuapp.com/notes")
@@ -19,15 +20,16 @@ export default function App(){
                     if(!newKeys.has(d._id)) newKeys.add(d._id)
                 })
                 setKeys(newKeys)
+                setDel(false)
             })
-    },[keys])
+    },[keys, del])
 
     return (
         <div>
             <AddNote keys={keys}/>
             <div className="container">
                 {
-                    notes.map(note => <Note note = {note}/>)
+                    notes.map(note => <Note note = {note} setDel = {setDel}/>)
                 }
             </div>
         </div>

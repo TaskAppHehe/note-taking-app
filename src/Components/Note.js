@@ -1,16 +1,58 @@
-import React from "react";
+import React, {useState} from "react";
 export default function Note(props){
+
+    var [title, setTitle] = useState(props.note.title)
+    var [content, setContent] = useState(props.note.content)
+
+    var textAreaFields = [
+        {
+            value: title,
+            onChange: e => setTitle(e.target.value)
+        },
+        {
+            value: content,
+            onChange: e => setContent(e.target.value),
+            rows: 10,
+            cols: 60
+        }
+    ]
+
+    function updateNote(){
+        fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
+            method: "PUT",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify({
+                title: title,
+                content: content
+            })
+        })
+        .then(alert("Updated!"))
+    }
     function deleteNote(){
         fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
             method: "DELETE"
         })
-        .then(alert("Deleted!"))
+        .then(() => {
+            props.setDel(true)
+            alert("Deleted!")
+        })
     }
     return(
-        <div>
-            <h3>{props.note.title}</h3>
-            <p>{props.note.content}</p>
-            <button onClick={deleteNote}>Delete</button>
+        <div className="vertical-flex-container m-10">
+            <p>id {props.note._id}</p>
+            {
+                textAreaFields.map(textArea => 
+                    <textarea 
+                        value = {textArea.value} 
+                        onChange = {textArea.onChange}
+                        rows = {textArea.rows}
+                        cols = {textArea.cols}/>
+                )    
+            }
+            <div>
+                <button onClick = {updateNote}>Update</button>
+                <button onClick = {deleteNote}>Delete</button>
+            </div>
         </div>
     )
 }

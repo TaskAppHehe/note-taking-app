@@ -8,6 +8,7 @@ export default function AddNote(props){
             placeholder: "Title",
             type: "text",
             onChange: e => setTitle(e.target.value)
+            
         },
         {
             placeholder: "Content",
@@ -21,11 +22,11 @@ export default function AddNote(props){
         while(props.keys.has(i)) i++
         fetch("https://fast-forest-86060.herokuapp.com/notes",{
             method: "POST",
-            headers: {'content-type': 'application/json'},
+            headers: {"content-type":"application/json"},
             body: JSON.stringify({
-                "_id":i,
-                title:title,
-                content:content
+                "_id": i,
+                title: title, 
+                content: content
             })
         })
             .then(response => response.json())
