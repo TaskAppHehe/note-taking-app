@@ -29,17 +29,17 @@ export default function Note(props){
         .then(alert("Updated!"))
     }
     function deleteNote(){
+        alert("Going to delete note id " + props.note._id)
         fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
             method: "DELETE"
         })
         .then(() => {
             props.setDel(true)
-            alert("Deleted!")
         })
     }
     return(
         <div className="vertical-flex-container m-10">
-            <p>id {props.note._id}</p>
+            <p>_id {props.note._id}</p>
             {
                 textAreaFields.map(textArea => 
                     <textarea 

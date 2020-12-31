@@ -24,13 +24,15 @@ export default function AddNote(props){
             method: "POST",
             headers: {"content-type":"application/json"},
             body: JSON.stringify({
-                "_id": i,
+                _id : i,
                 title: title, 
                 content: content
             })
         })
             .then(response => response.json())
-            .then(alert("New note added!"))
+            .then(() => {
+                props.setAdd(true)
+            })
     }
     return(
         <div>
