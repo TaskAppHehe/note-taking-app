@@ -20,17 +20,21 @@ export default function Note(props){
     function updateNote(){
         fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
             method: "PUT",
-            headers: {"content-type": "application/json"},
+            headers: {"content-type": "application/json", 
+                      "Authorization": "Basic" + btoa("admin:password")},
             body: JSON.stringify({
                 title: title,
                 content: content
             })
         })
+        .then( alert("Note changed!"))
     }
     function deleteNote(){
         if(window.confirm("Do you want to delete this note?")){
             fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
-            method: "DELETE"
+            method: "DELETE",
+            headers: {"content-type": "application/json", 
+                      "Authorization": "Basic " +  btoa("admin:password")}
             })
             .then(() => {
                 props.setNoteChanged(true)

@@ -28,7 +28,8 @@ export default function AddNote(props){
         while(props.keys.has(i)) i++
         fetch("https://fast-forest-86060.herokuapp.com/notes",{
             method: "POST",
-            headers: {"content-type":"application/json"},
+            headers: {"content-type": "application/json", 
+                      "Authorization": "Basic " +  btoa("admin:password")},
             body: JSON.stringify({
                 _id : i,
                 title: title, 
@@ -49,7 +50,7 @@ export default function AddNote(props){
                     placeholder={input.placeholder}
                     type = {input.type}
                     onChange = {input.onChange}
-                    oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                    
                 />)
             }
             <button onClick={postNewNote}>Add note</button>

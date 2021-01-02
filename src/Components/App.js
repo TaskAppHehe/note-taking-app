@@ -13,7 +13,12 @@ export default function App(){
 
     useEffect(()=>{
         setNotes([])
-        fetch("https://fast-forest-86060.herokuapp.com/notes")
+        fetch("https://fast-forest-86060.herokuapp.com/notes",{
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "Basic " +  btoa("admin:password")
+            }
+        })
             .then(data => data.json())
             .then(data => {
                 setNotes(data)
@@ -29,7 +34,7 @@ export default function App(){
     },[add, noteChanged])
 
     return (
-        <div>
+        <div className = "bg-primary">
             <Header />
             <AddNote keys = {keys} setAdd = {setAdd}/>
             <div className="container">

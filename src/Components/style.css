@@ -20,3 +20,11 @@
 .bg-yellow{
     background-color: rgb(255, 255, 51);
 }
+
+.bg-main{
+    background-color: aqua;
+}
+
+h2{
+    color: aqua;
+}
