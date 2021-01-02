@@ -13,7 +13,7 @@ export default function Note(props){
             value: content,
             onChange: e => setContent(e.target.value),
             rows: 10,
-            cols: 60
+            cols: 50
         }
     ]
 
@@ -26,27 +26,27 @@ export default function Note(props){
                 content: content
             })
         })
-        .then(alert("Updated!"))
     }
     function deleteNote(){
-        alert("Going to delete note id " + props.note._id)
-        fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
+        if(window.confirm("Do you want to delete this note?")){
+            fetch("https://fast-forest-86060.herokuapp.com/notes/"+props.note._id,{
             method: "DELETE"
-        })
-        .then(() => {
-            props.setDel(true)
-        })
+            })
+            .then(() => {
+                props.setNoteChanged(true)
+            })
+        }
     }
     return(
-        <div className="vertical-flex-container m-10">
-            <p>_id {props.note._id}</p>
+        <div className="vertical-flex-container margin-10">
             {
                 textAreaFields.map(textArea => 
-                    <textarea 
+                    <textarea className = "bg-yellow"
                         value = {textArea.value} 
                         onChange = {textArea.onChange}
                         rows = {textArea.rows}
-                        cols = {textArea.cols}/>
+                        cols = {textArea.cols}
+                    />
                 )    
             }
             <div>

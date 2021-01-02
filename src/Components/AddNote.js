@@ -13,11 +13,17 @@ export default function AddNote(props){
         {
             placeholder: "Content",
             type: "text",
-            onChange: e => setContent(e.target.value)
+            onChange: e => setContent(e.target.value),
+            rows: 10,
+            cols: 50
         }
     ]
 
     function postNewNote(){
+        if(!title || !content) {
+            alert("Title or content cannot be left empty")
+            return;
+        }
         var i = 0;
         while(props.keys.has(i)) i++
         fetch("https://fast-forest-86060.herokuapp.com/notes",{
@@ -35,14 +41,16 @@ export default function AddNote(props){
             })
     }
     return(
-        <div>
+        <div className="vertical-flex-container width-fit-content">
             <h2>Add new note</h2>
             {
                 inputFields.map(input => 
-                <input 
+                <textarea
                     placeholder={input.placeholder}
                     type = {input.type}
-                    onChange = {input.onChange}/>)
+                    onChange = {input.onChange}
+                    oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                />)
             }
             <button onClick={postNewNote}>Add note</button>
         </div>

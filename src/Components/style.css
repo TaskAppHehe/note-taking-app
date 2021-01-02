@@ -9,6 +9,14 @@
     flex-direction: column;
 }
 
-.m-10{
+.margin-10{
     margin: 10px;
+}
+
+.width-fit-content{
+    width: fit-content;
+}
+
+.bg-yellow{
+    background-color: rgb(255, 255, 51);
 }

@@ -2,13 +2,14 @@ import React, {useState, useEffect} from "react";
 
 import Note from "./Note"
 import AddNote from "./AddNote"
+import Header from "./Header"
 
 import "./style.css"
 export default function App(){
     var [notes,setNotes] = useState([])
     var [keys, setKeys] = useState(new Set())
     var [add, setAdd] = useState(false)
-    var [del, setDel] = useState(false)
+    var [noteChanged, setNoteChanged] = useState(false)
 
     useEffect(()=>{
         setNotes([])
@@ -23,16 +24,17 @@ export default function App(){
                 })
                 setKeys(newKeys)
                 setAdd(false)
-                setDel(false)
+                setNoteChanged(false)
             })
-    },[add, del])
+    },[add, noteChanged])
 
     return (
         <div>
+            <Header />
             <AddNote keys = {keys} setAdd = {setAdd}/>
             <div className="container">
                 {
-                    notes.map(note => <Note note = {note} setDel = {setDel}/>)
+                    notes.map(note => <Note note = {note} setNoteChanged = {setNoteChanged}/>)
                 }
             </div>
         </div>
