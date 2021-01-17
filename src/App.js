@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Main from "./Components/App"
+import Main from "./Components/Main" //changes to App for old notes
 
 function App() {
   return (
