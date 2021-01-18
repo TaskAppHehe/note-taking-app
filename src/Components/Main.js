@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import Login from "./Login"
+import RouterControl from "./RouterControl.js"
+import UserContext from "./UserContext"
+
 export default function Main(props){
+    var [loggedIn, setLoggedIn] = useState(false);
     return(
-        <div>
-            <Login/>
-        </div>
+        <UserContext.Provider value = {[loggedIn, setLoggedIn]}>
+            <RouterControl/>
+        </UserContext.Provider>
     )
 }

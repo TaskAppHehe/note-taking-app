@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+
+import UserContext from "./UserContext"
 export default function Login(props){
     var [username, setUserName] = useState();
     var [password, setPassWord] = useState();
     var [users, setUsers] = useState([]);
+    var [loggedIn, setLoggedIn] = useContext(UserContext)
 
     useEffect(()=> {
         fetch("https://postgres-khai.herokuapp.com/users")
@@ -26,15 +29,10 @@ export default function Login(props){
 
     var handleSubmit = (e) => {
         e.preventDefault();
-        var signedIn = false;
         users.map(user => {
-            if(user.username == username && user.password == password)
-            {
-                signedIn = true;
-            }
+            if(user.username == username && user.password == password) setLoggedIn(true)
         })
-        if(signedIn) alert("Signed in")
-        else alert("You failed")
+        
     }
 
     return(
