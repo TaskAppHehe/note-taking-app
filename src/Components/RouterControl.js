@@ -5,7 +5,8 @@ import Login from './Login';
 import DashBoard from "./DashBoard"
 import UserContext from "./UserContext"
 export default function HomePage(props){
-    var [loggedIn, useLoggedIn] = useContext(UserContext)
+    var [currentUser] = useContext(UserContext)
+
     return(
         <Router>
                 <nav>
@@ -16,10 +17,10 @@ export default function HomePage(props){
                 </nav>
                 <Switch>
                     <Route path = "/dashboard">
-                        { loggedIn ? <DashBoard/> : <Redirect to = "/"/> }
+                        { currentUser ? <DashBoard/> : <Redirect to = "/"/> }
                     </Route>
                     <Route path = "/">
-                        { loggedIn ? <Redirect to = "/dashboard" /> : <Login/>}
+                        { currentUser ? <Redirect to = "/dashboard" /> : <Login/>}
                     </Route>
                 </Switch>
         </Router>

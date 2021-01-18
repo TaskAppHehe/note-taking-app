@@ -3,10 +3,11 @@ import React, {useState} from 'react';
 import RouterControl from "./RouterControl.js"
 import UserContext from "./UserContext"
 
+import './style.css'
 export default function Main(props){
-    var [loggedIn, setLoggedIn] = useState(false);
+    var [currentUser, setCurrentUser] = useState(false);
     return(
-        <UserContext.Provider value = {[loggedIn, setLoggedIn]}>
+        <UserContext.Provider value = {[currentUser, setCurrentUser]}>
             <RouterControl/>
         </UserContext.Provider>
     )

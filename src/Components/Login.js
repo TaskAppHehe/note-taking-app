@@ -5,7 +5,7 @@ export default function Login(props){
     var [username, setUserName] = useState();
     var [password, setPassWord] = useState();
     var [users, setUsers] = useState([]);
-    var [loggedIn, setLoggedIn] = useContext(UserContext)
+    var [, setCurrentUser] = useContext(UserContext)
 
     useEffect(()=> {
         fetch("https://postgres-khai.herokuapp.com/users")
@@ -30,7 +30,7 @@ export default function Login(props){
     var handleSubmit = (e) => {
         e.preventDefault();
         users.map(user => {
-            if(user.username == username && user.password == password) setLoggedIn(true)
+            if(user.username === username && user.password === password) setCurrentUser(user)
         })
         
     }
