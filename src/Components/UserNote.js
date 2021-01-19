@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 export default function UserNote(props){
     var [title, setTitle] = useState(props.note.title)
     var [content, setContent] = useState(props.note.content)
-
+    
     var textAreaFields = [
         {
             value: title,
@@ -17,7 +17,7 @@ export default function UserNote(props){
     ]
 
     var updateNote = () => {
-        fetch("https://postgres-khai.herokuapp.com/notes" +props.note.id,{
+        fetch("https://postgres-khai.herokuapp.com/notes/" +props.note.id,{
             method: "PUT",
             headers:{"content-type": "application/json"},
             body: JSON.stringify({
@@ -28,7 +28,11 @@ export default function UserNote(props){
     }
 
     var deleteNote = () => {
-
+        fetch("https://postgres-khai.herokuapp.com/notes/" +props.note.id,{
+            method: "delete",
+        })
+        .then(props.setNotesChange(!props.notesChange))
+        .then(alert("Delete note!"))
     }
 
     return(

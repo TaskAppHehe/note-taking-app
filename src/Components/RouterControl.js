@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom"
 
-import Login from './Login';
+import PublicHomePage from "./PublicHomePage"
+import LogIn from "./Login"
 import DashBoard from "./DashBoard"
 import UserContext from "./UserContext"
 export default function HomePage(props){
@@ -11,7 +12,7 @@ export default function HomePage(props){
         <Router>
                 <nav>
                     <ul> {/* tried to remove this  */}
-                        <li><Link to = "/">Home, login for now</Link></li>
+                        <li><Link to = "/">Home</Link></li>
                         <li><Link to = "/dashboard">Dashboard</Link></li>
                     </ul>
                 </nav>
@@ -20,7 +21,7 @@ export default function HomePage(props){
                         { currentUser ? <DashBoard/> : <Redirect to = "/"/> }
                     </Route>
                     <Route path = "/">
-                        { currentUser ? <Redirect to = "/dashboard" /> : <Login/>}
+                        { currentUser ? <Redirect to = "/dashboard" /> : <PublicHomePage/>}
                     </Route>
                 </Switch>
         </Router>
