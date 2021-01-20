@@ -36,7 +36,10 @@ export default function AddNote(props){
             })
         })
         .then(response => response.json())
-        .then(alert("Added note!"))
+        .then(() => {
+            alert("Added note!")
+            props.setNotesChange(true)
+        })
     }
     return(
         <div className="vertical-flex-container width-fit-content">

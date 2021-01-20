@@ -2,8 +2,8 @@ import React, {useState, useEffect, useContext} from 'react';
 
 import UserContext from "./UserContext"
 export default function Login(props){
-    var [username, setUserName] = useState();
-    var [password, setPassWord] = useState();
+    var [username, setUserName] = useState('');
+    var [password, setPassWord] = useState('');
     var [users, setUsers] = useState([]);
     var [, setCurrentUser] = useContext(UserContext)
 

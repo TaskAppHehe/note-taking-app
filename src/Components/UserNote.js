@@ -31,7 +31,7 @@ export default function UserNote(props){
         fetch("https://postgres-khai.herokuapp.com/notes/" +props.note.id,{
             method: "delete",
         })
-        .then(props.setNotesChange(!props.notesChange))
+        .then(props.setNotesChange(true))
         .then(alert("Delete note!"))
     }
 

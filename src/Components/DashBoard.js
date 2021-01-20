@@ -13,19 +13,18 @@ export default function DashBoard(props){
         fetch("https://postgres-khai.herokuapp.com/users/" + currentUser.id +"/notes")
         .then(data => data.json())
         .then(data => setNotes(data))
-        .then(setNotesChange(!notesChange))
+        .then(setNotesChange(false))
     }, [currentUser.id, notesChange])
 
     return(
         <>
             <button onClick = {() => setCurrentUser()}>Log out</button>
-            <AddUserNote/>
+            <AddUserNote setNotesChange = {setNotesChange}/>
             <div className = "container">
                 {
                     notes.map(note => 
                         <UserNote 
-                            note = {note} 
-                            notesChange = {notesChange}
+                            note = {note}
                             setNotesChange = {setNotesChange}
                             />)
                 }
